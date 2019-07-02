@@ -1,14 +1,11 @@
 import React, {Component} from 'react'
 import {actions} from "mirrorx";
-import {FormControl, Select} from "tinper-bee";
-import FormList from 'components/FormList';
-import SearchPanel from 'components/SearchPanel';
-import {getValidateFieldsTrim} from "utils";
+import {Form, Button} from "tinper-bee";
 
+
+import {ComInput, ComDatePicker, ComRadio, ComSelect} from 'components/Customize/FormItemCom';
 import './index.less'
 
-const FormItem = FormList.Item;
-const {Option} = Select;
 
 class SearchArea extends Component {
     constructor(props) {
@@ -16,78 +13,92 @@ class SearchArea extends Component {
         this.state = {}
     }
 
-    /** 查询数据
-     * @param {*} error 校验是否成功
-     * @param {Object} values 表单数据
-     */
-    search = () => {
-        this.props.form.validateFields((err, _values) => {
-            let values = getValidateFieldsTrim(_values);
-            // 获取默认请求的 分页信息
-            if(!err){
-                let {pageSize} = this.props.orderObj;
-                values.pageIndex = 0;
-                values.pageSize = pageSize;
-                actions.masterDetailOne.loadList(values);
-            }
-        });
+
+    componentDidMount() {
+        this.props.onRef(this)
     }
 
+    search = () => {
+        this.props.search();
+    }
+
+    getSearchValue = () => {
+        let result = null;
+        this.props.form.validateFields((err, values) => {
+            result = values;
+        });
+        return result;
+    }
+
+    /**
+     * 清空 action里的搜索条件
+     */
     reset = () => {
         this.props.form.resetFields();
+        // actions.mediumreport.resetFields();
+
     }
 
+
     render() {
-        let {form: {getFieldProps}} = this.props;
+
+        const {form} = this.props;
+
         return (
-            <SearchPanel
-                reset={this.reset}
-                search={this.search}
-            >
-
-                <FormList size="sm">
-                    <FormItem
+            <Form className="customize-form">
+                <div className="form-panel form-search">
+                    <ComInput
+                        form={form}
+                        id="search_orderCode"
                         label="编号"
-                    >
-                        <FormControl
-                            placeholder='模糊查询'
-                            {...getFieldProps('search_orderCode', {initialValue: '',})}
-                        />
-                    </FormItem>
+                        placeholder='模糊查询'
+                    />
 
-                    <FormItem
+                    <ComInput
+                        form={form}
+                        id="search_orderName"
                         label="名称"
-                    >
-                        <FormControl placeholder='模糊查询' {...getFieldProps('search_orderName', {initialValue: '',})}/>
-                    </FormItem>
+                        placeholder='模糊查询'
+                    />
 
-                    <FormItem
-                        label="类型"
-                    >
-                        <Select {...getFieldProps('search_orderType', {initialValue: ''})}>
-                            <Option value="">请选择</Option>
-                            <Option value="1">普通采购</Option>
-                            <Option value="2">委托代销</Option>
-                            <Option value="3">直运采购</Option>
-                        </Select>
-                    </FormItem>
+                    <ComSelect
+                        form={form}
+                        id='search_orderType'     //id:字段英文名
+                        data={[
+                            {value: '', key: '请选择'},
+                            {value: '1', key: '普通采购'},
+                            {value: '2', key: '委托代销'},
+                            {value: '3', key: '直运采购'},
+                        ]}  //传参，数组型
+                        label="类型"   //字段名
+                    />
 
-                    <FormItem
-                        label="流程状态"
-                    >
-                        <Select {...getFieldProps('search_bpmState', {initialValue: ''})}>
-                            <Option value="">全部</Option>
-                            <Option value={0}>待确认</Option>
-                            <Option value={1}>执行中</Option>
-                            <Option value={2}>已办结</Option>
-                            <Option value={3}>终止</Option>
-                        </Select>
-                    </FormItem>
-                </FormList>
 
-            </SearchPanel>
+                    {/*避免 查询和重置 独自一列*/}
+                    <div className="form-search">
+                        <ComSelect
+                            form={form}
+                            id='search_orderType'     //id:字段英文名
+                            data={[
+                                {value: '', key: '请选择'},
+                                {value: 0, key: '待确认'},
+                                {value: 1, key: '执行中'},
+                                {value: 2, key: '已办结'},
+                                {value: 3, key: '终止'},
+                            ]}  //传参，数组型
+                            label="流程状态"   //字段名
+                        />
+                        <div className="search-item-btn">
+                            <Button colors="primary" onClick={this.search} size="sm"> 查询 </Button>
+                            <Button shape="border" className="ml10" onClick={this.reset} size="sm"> 重置 </Button>
+                        </div>
+                    </div>
+
+
+                </div>
+            </Form>
         )
     }
 }
 
-export default FormList.createForm()(SearchArea)
+export default Form.createForm()(SearchArea)

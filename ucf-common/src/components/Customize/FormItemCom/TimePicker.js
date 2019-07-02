@@ -3,6 +3,8 @@ import { Label, } from "tinper-bee";
 import Timepicker from "tinper-bee/lib/Timepicker";
 import Form from "bee-form";
 import moment from 'moment';
+import FormError from '../FormError/index';
+
 import './index.less';
 
 const { FormItem } = Form;

@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import { Select, Label } from "tinper-bee";
 
 import Form from "bee-form";
-import FormError from 'common/FormError/index';
+import FormError from '../FormError/index';
 
 const { FormItem } = Form;
 const Option = Select.Option;

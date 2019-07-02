@@ -3,8 +3,8 @@ import React, { Component } from 'react'
 import { Label, Select } from "tinper-bee";
 
 import Form from "bee-form";
-import FormError from 'common/FormError/index';
-import { uuid } from 'tools';
+import FormError from '../FormError/index';
+
 
 const { FormItem } = Form;
 

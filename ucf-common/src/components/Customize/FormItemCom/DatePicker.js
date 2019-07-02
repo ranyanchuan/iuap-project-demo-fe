@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { FormControl, Label, } from "tinper-bee";
 import Form from "bee-form";
 import DatePicker from "bee-datepicker";
-import FormError from 'common/FormError/index';
+import FormError from '../FormError/index';
 import './index.less';
 
 const { FormItem } = Form;

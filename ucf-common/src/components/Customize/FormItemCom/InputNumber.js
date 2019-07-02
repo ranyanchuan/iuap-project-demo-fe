@@ -5,7 +5,7 @@ import InputNumber from 'bee-input-number';
 import 'bee-input-number/build/InputNumber.css';
 
 import Form from "bee-form";
-import FormError from 'common/FormError/index';
+import FormError from '../FormError/index';
 
 const { FormItem } = Form;
 

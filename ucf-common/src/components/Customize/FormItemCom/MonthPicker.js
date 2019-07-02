@@ -3,7 +3,7 @@ import { FormControl, Label, } from "tinper-bee";
 import Form from "bee-form";
 //import DatePicker from "bee-datepicker";
 import DatePicker from "tinper-bee/lib/Datepicker";
-import FormError from 'common/FormError/index';
+import FormError from '../FormError/index';
 import './index.less';
 const { MonthPicker } = DatePicker;
 const { FormItem } = Form;
