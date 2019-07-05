@@ -47,12 +47,42 @@ class SearchArea extends Component {
         return (
             <Form className="customize-form">
                 <div className="form-panel form-search">
+
                     <ComInput
                         form={form}
                         id="search_orderCode"
                         label="编号"
                         placeholder='模糊查询'
                     />
+
+
+                    <ComInput
+                        form={form}
+                        id="search_orderName"
+                        label="名称"
+                        placeholder='模糊查询'
+                    />
+                    <ComInput
+                        form={form}
+                        id="search_orderCode"
+                        label="编号"
+                        placeholder='模糊查询'
+                    />
+
+
+                    <ComInput
+                        form={form}
+                        id="search_orderName"
+                        label="名称"
+                        placeholder='模糊查询'
+                    />
+                    <ComInput
+                        form={form}
+                        id="search_orderCode"
+                        label="编号"
+                        placeholder='模糊查询'
+                    />
+
 
                     <ComInput
                         form={form}
