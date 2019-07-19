@@ -105,7 +105,7 @@ class SearchArea extends Component {
 
 
                     {/*避免 查询和重置 独自一列*/}
-                    <div className="form-search">
+                    <div className="form-search search-btn">
                         <ComSelect
                             form={form}
                             id='search_orderType'     //id:字段英文名
